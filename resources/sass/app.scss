@@ -1,0 +1,15 @@
+@import "custom";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-vue/src/index";
+
+html,
+body {
+    color: $primary-color;
+    background-color: #fff;
+    margin: 0;
+}
+
+.top-right {
+    right: 10px;
+    top: 18px;
+}

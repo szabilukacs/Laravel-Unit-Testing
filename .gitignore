@@ -17,4 +17,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-resources/js/bootstrap.js
+public/js/app.js
+public/css/app.css
+public/vendor

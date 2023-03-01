@@ -1,0 +1,18 @@
+$grid-breakpoints: (
+    xs: 0,
+    sm: 480px,
+    md: 640px,
+    lg: 992px,
+    xl: 1300px
+);
+
+$body-bg: #f8fafc;
+
+$enable-rounded: false;
+
+$primary-color: #636b6f;
+
+$theme-colors: (
+    "primary": $primary-color,
+    "danger": #ff4136
+);

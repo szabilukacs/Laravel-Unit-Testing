@@ -46,3 +46,4 @@ Route::get('qrcode', [QrCodeController::class, 'index'])
     ->name('qrcode.show');
 Route::get('qrcode/export/{url}', [QrCodeController::class, 'export'])
     ->name('qrcode.export');
+

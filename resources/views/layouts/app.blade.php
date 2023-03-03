@@ -60,6 +60,7 @@
                             <h2 class="mr-5">{{ Auth::user()->name }}</h2>
                         </li>
                         <b-nav-item-dropdown text="{{ Auth::user()->name }}" right>
+
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-link">{{ __('Log Out') }}</button>

@@ -21,3 +21,4 @@ yarn-error.log
 /public/css/app.css
 /public/vendor
 /tests/Coverage/
+tests/Coverage

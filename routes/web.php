@@ -47,3 +47,5 @@ Route::get('qrcode', [QrCodeController::class, 'index'])
 Route::get('qrcode/export/{url}', [QrCodeController::class, 'export'])
     ->name('qrcode.export');
 
+// XDEBUG_MODE=coverage php artisan test --coverage
+

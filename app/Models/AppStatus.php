@@ -11,7 +11,7 @@ class AppStatus extends Model
 {
     use HasFactory;
 
-    public function appstatuses(): BelongsTo
+    public function workSpace(): BelongsTo
     {
         return $this->belongsTo(WorkSpace::class);
     }

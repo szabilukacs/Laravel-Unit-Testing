@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Models;
 
+use App\Models\AppStatus;
 use App\Models\User;
 use App\Models\WorkSpace;
 use App\Models\WorkSpaceInvitation;
@@ -35,5 +36,13 @@ class WorkSpaceTest extends TestCase
             ->for($this->workSpace)
             ->create();
         $this->assertInstanceOf(WorkSpaceInvitation::class, $this->workSpace->workSpaceInvitation->first());
+    }
+
+    public function test_work_space_has_many_appstatus()
+    {
+        AppStatus::factory()
+            ->for($this->workSpace)
+            ->create();
+        $this->assertInstanceOf(AppStatus::class, $this->workSpace->appstatus()->first());
     }
 }

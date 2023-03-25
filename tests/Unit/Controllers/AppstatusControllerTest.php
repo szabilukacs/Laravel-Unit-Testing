@@ -19,7 +19,7 @@ class AppstatusControllerTest extends TestCase
     public function test_appstatus_cannot_access_by_anyone(): void
     {
         $this->get('appstatus')
-            ->assertRedirect('/login');;
+            ->assertRedirect('/login');
     }
 
     public function test_appstatus_can_access_by_user(): void

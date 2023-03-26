@@ -44,7 +44,7 @@ class QrCodeControllerTest extends TestCase
     {
         $url = 'ms.sapientia.ro';
 
-        $response = $this->get('qrcode/export/'.$url);
+        $response = $this->get('qrcode/export/' . $url);
         $response->assertStatus(200);
         $response->assertSee('The QR code has been exported successfully!');
     }

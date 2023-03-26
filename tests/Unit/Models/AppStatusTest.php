@@ -23,7 +23,7 @@ class AppStatusTest extends TestCase
 
     public function test_appstatutes_belongs_to_workspace()
     {
-        $this->assertInstanceOf(WorkSpace::class,$this->appstatus->workSpace);
+        $this->assertInstanceOf(WorkSpace::class, $this->appstatus->workSpace);
     }
 
     public function test_appStatues_has_many_programs()

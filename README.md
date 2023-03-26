@@ -4,7 +4,7 @@
 This repository contains tests for the Smart24 Laravel website. The website allows users to register, log in, create workspaces, add appstatuses, and perform other related actions. Users can also generate QR codes for their website without logging in. The tests included in this repository are designed to test the various functions of the website.
 
 
-## What's Included
+## Website functions
 
 - User registration
 - User login
@@ -16,7 +16,7 @@ This repository contains tests for the Smart24 Laravel website. The website allo
 - Appstatus deletion
 - QR code generation
 
-## Screenshots
+## Smart24 Website
 
 ![App Screenshot](https://github.com/szabilukacs/VVProject/blob/main/Documentation/QRcode.png)
 

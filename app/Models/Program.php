@@ -10,7 +10,7 @@ class Program extends Model
 {
     use HasFactory;
 
-    public function appstatuses(): BelongsTo
+    public function appStatus(): BelongsTo
     {
         return $this->belongsTo(AppStatus::class);
     }

@@ -2,7 +2,10 @@
 
 namespace Tests\Unit\Controllers;
 
+use App\Models\AppStatus;
 use App\Models\User;
+use App\Models\WorkSpace;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class AppstatusControllerTest extends TestCase
@@ -29,5 +32,103 @@ class AppstatusControllerTest extends TestCase
             ->get('appstatus');
         $response->assertSee('My Appstatuses');
     }
+
+    public function test_appstatus_can_show_an_appstatus(): void
+    {
+        $user = User::factory()->create();
+        $this->workSpace =  WorkSpace::factory()->create();
+        // Add this workspace to this user
+        DB::table('user_work_space')
+            ->insert([
+                'user_id' => $user->id,
+                'work_space_id' => $this->workSpace->id,
+            ]);
+        $appstatus = AppStatus::factory()
+            ->for($this->workSpace)
+            ->create([
+                'name' =>'Test appstatus name',
+                'id' => 10
+            ]);
+        $response = $this->actingAs($user)
+            ->get('appstatus/10');
+        $response->assertSee('Test appstatus name');
+    }
+
+    public function test_appstatus_can_show_an_edit_page(): void
+    {
+        $user = User::factory()->create();
+        $this->workSpace =  WorkSpace::factory()->create();
+        // Add this workspace to this user
+        DB::table('user_work_space')
+            ->insert([
+                'user_id' => $user->id,
+                'work_space_id' => $this->workSpace->id,
+            ]);
+        $appstatus = AppStatus::factory()
+            ->for($this->workSpace)
+            ->create([
+                'name' =>'Test appstatus name edited',
+                'id' => 10
+            ]);
+        $response = $this->actingAs($user)
+            ->get('appstatus/10/edit');
+        $response->assertSee($appstatus->name);
+    }
+
+    public function test_appstatus_update_function(): void
+    {
+        $user = User::factory()->create();
+        $this->workSpace =  WorkSpace::factory()->create();
+        // Add this workspace to this user
+        DB::table('user_work_space')
+            ->insert([
+                'user_id' => $user->id,
+                'work_space_id' => $this->workSpace->id,
+            ]);
+        $appstatus = AppStatus::factory()
+            ->for($this->workSpace)
+            ->create([
+                'name' =>'Test appstatus name update',
+                'id' => 10
+            ]);
+
+        $response = $this->actingAs($user)
+            ->put('appstatus/10', [
+                'name' => 'Test comp.name - megvaltoztatva',
+                'description' => 'Str. Bolcsescu 49',
+                'logo_path' => 'c:users/blabla/asd.jpg',
+            ]);
+        $response->assertRedirect('/appstatus/10');
+        $response->assertSee($appstatus->name);
+
+    }
+
+    public function test_appstatus_add_program_function(): void
+    {
+        $user = User::factory()->create();
+        $this->workSpace =  WorkSpace::factory()->create();
+        // Add this workspace to this user
+        DB::table('user_work_space')
+            ->insert([
+                'user_id' => $user->id,
+                'work_space_id' => $this->workSpace->id,
+            ]);
+        $appstatus = AppStatus::factory()
+            ->for($this->workSpace)
+            ->create([
+                'name' =>'Test appstatus name update',
+                'id' => 15
+            ]);
+
+        $response = $this->actingAs($user)
+            ->put('appstatus/addProgram/15', [
+                'name' => 'Test comp.name add new',
+                'description' => 'Str. Bolcsescu 49',
+            ]);
+        $response->assertRedirect('/appstatus/15');
+    }
+
+
+
 
 }

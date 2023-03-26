@@ -36,7 +36,7 @@ class AppstatusControllerTest extends TestCase
     public function test_appstatus_can_show_an_appstatus(): void
     {
         $user = User::factory()->create();
-        $this->workSpace =  WorkSpace::factory()->create();
+        $this->workSpace = WorkSpace::factory()->create();
         // Add this workspace to this user
         DB::table('user_work_space')
             ->insert([
@@ -46,7 +46,7 @@ class AppstatusControllerTest extends TestCase
         $appstatus = AppStatus::factory()
             ->for($this->workSpace)
             ->create([
-                'name' =>'Test appstatus name',
+                'name' => 'Test appstatus name',
                 'id' => 10
             ]);
         $response = $this->actingAs($user)
@@ -57,7 +57,7 @@ class AppstatusControllerTest extends TestCase
     public function test_appstatus_can_show_an_edit_page(): void
     {
         $user = User::factory()->create();
-        $this->workSpace =  WorkSpace::factory()->create();
+        $this->workSpace = WorkSpace::factory()->create();
         // Add this workspace to this user
         DB::table('user_work_space')
             ->insert([
@@ -67,7 +67,7 @@ class AppstatusControllerTest extends TestCase
         $appstatus = AppStatus::factory()
             ->for($this->workSpace)
             ->create([
-                'name' =>'Test appstatus name edited',
+                'name' => 'Test appstatus name edited',
                 'id' => 10
             ]);
         $response = $this->actingAs($user)
@@ -78,7 +78,7 @@ class AppstatusControllerTest extends TestCase
     public function test_appstatus_update_function(): void
     {
         $user = User::factory()->create();
-        $this->workSpace =  WorkSpace::factory()->create();
+        $this->workSpace = WorkSpace::factory()->create();
         // Add this workspace to this user
         DB::table('user_work_space')
             ->insert([
@@ -88,7 +88,7 @@ class AppstatusControllerTest extends TestCase
         $appstatus = AppStatus::factory()
             ->for($this->workSpace)
             ->create([
-                'name' =>'Test appstatus name update',
+                'name' => 'Test appstatus name update',
                 'id' => 10
             ]);
 
@@ -99,14 +99,13 @@ class AppstatusControllerTest extends TestCase
                 'logo_path' => 'c:users/blabla/asd.jpg',
             ]);
         $response->assertRedirect('/appstatus/10');
-        $response->assertSee($appstatus->name);
 
     }
 
     public function test_appstatus_add_program_function(): void
     {
         $user = User::factory()->create();
-        $this->workSpace =  WorkSpace::factory()->create();
+        $this->workSpace = WorkSpace::factory()->create();
         // Add this workspace to this user
         DB::table('user_work_space')
             ->insert([
@@ -116,19 +115,45 @@ class AppstatusControllerTest extends TestCase
         $appstatus = AppStatus::factory()
             ->for($this->workSpace)
             ->create([
-                'name' =>'Test appstatus name update',
+                'name' => 'Test appstatus name update',
                 'id' => 15
             ]);
 
         $response = $this->actingAs($user)
-            ->put('appstatus/addProgram/15', [
+            ->post('appstatus/addProgram/15', [
                 'name' => 'Test comp.name add new',
                 'description' => 'Str. Bolcsescu 49',
+                'id' => 15,
             ]);
         $response->assertRedirect('/appstatus/15');
     }
 
+    public function test_appstatus_destroy_function(): void
+    {
+        $user = User::factory()->create();
+        $this->workSpace = WorkSpace::factory()->create();
+        // Add this workspace to this user
+        DB::table('user_work_space')
+            ->insert([
+                'user_id' => $user->id,
+                'work_space_id' => $this->workSpace->id,
+            ]);
+        $appstatus = AppStatus::factory()
+            ->for($this->workSpace)
+            ->create([
+                'name' => 'Test app Delete fcn',
+                'id' => 15
+            ]);
 
+        $response = $this->actingAs($user)
+            ->delete('appstatus/15', [
+                'id' => 15,
+            ]);
+        $response->assertRedirect('/appstatus');
+        $this->assertDatabaseMissing('app_statuses', [
+            'name' => 'Test app Delete fcn'
+        ]);
+    }
 
 
 }

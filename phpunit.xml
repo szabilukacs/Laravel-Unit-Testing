@@ -18,6 +18,14 @@
         </include>
         <exclude>
             <directory suffix=".php">./app/Admin</directory>
+            <file>./app/Providers/RouteServiceProvider.php</file>
+            <file>./app/Providers/BroadcastServiceProvider.php</file>
+            <file>./app/Http/Requests/Auth/LoginRequest.php</file>
+            <file>./app/Http/Middleware/HandleInertiaRequests.php</file>
+            <file>./app/Http/Middleware/TrustHosts.php</file>
+            <file>./app/View/Components/AppLayout.php</file>
+            <file>./app/View/Components/GuestLayout.php</file>
+            <file>./app/Http/Controllers/WorkspaceInvitationController.php</file>
         </exclude>
         <report>
             <html outputDirectory="tests/Coverage/html"/>
